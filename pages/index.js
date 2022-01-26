@@ -1,6 +1,8 @@
-<<<<<<< HEAD
 import { Box, Button, Text, TextField, Image } from '@skynexui/components';
+import next from 'next';
+import React from 'react';
 import appConfig from '../config.json';
+import { useRouter } from 'next/router';
 
 function GlobalStyle() {
   return (
@@ -12,7 +14,7 @@ function GlobalStyle() {
         list-style: none;
       }
       body {
-        font-family: 'Kaushan Script', cursive;
+        font-family: 'Mochiy Pop P One', sans-serif;
             }
       /* App fit Height */ 
       html, body, #__next {
@@ -47,10 +49,10 @@ function Titulo(props) {
   );
 }
 
-
 export default function PaginaInicial() {
-  const username = 'Kaique_Kira';
-
+  {  /*const username = 'Kaique_Kira';*/ }
+  const [username, setUsername] = React.useState('Kaique-kira');
+  const roteamento = useRouter();
   return (
     <>
       <GlobalStyle />
@@ -58,7 +60,7 @@ export default function PaginaInicial() {
         styleSheet={{
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           backgroundColor: appConfig.theme.colors.primary['000'],
-          backgroundImage: 'url(https://sucodemanga.com.br/wp-content/uploads/2017/10/one-piece-thumb.jpg)',
+          backgroundImage: 'url(https://media0.giphy.com/media/4uMy0wqz6V1SM/giphy.gif?cid=ecf05e474t00ah2d8ace7cx0x4eb1bjdf44m39oufqdsmj1m&rid=giphy.gif&ct=g)',
           backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundBlendMode: 'multiply',
         }}
       >
@@ -79,6 +81,11 @@ export default function PaginaInicial() {
         >
           {/* Formulário */}
           <Box
+            onSubmit={function (infosdoevento){
+              infosdoevento.preventDefault();
+              console.log ('Alguem submeteu o Form')
+              roteamento.push('/chat')
+            }}
             as="form"
             styleSheet={{
               display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
@@ -89,8 +96,14 @@ export default function PaginaInicial() {
             <Text variant="body3" styleSheet={{ marginBottom: '32px', color: appConfig.theme.colors.neutrals["900"] }}>
               {appConfig.name}
             </Text>
-
+            
             <TextField
+            value={username}
+              onChange={function handler(event) {
+                console.log('usuário digitou', event.target.value)
+                const valor = event.target.value;
+                setUsername(valor);
+              }}
               fullWidth
               textFieldColors={{
                 neutral: {
@@ -137,7 +150,7 @@ export default function PaginaInicial() {
                 borderRadius: '50%',
                 marginBottom: '16px',
               }}
-              src={`https://github.com/kaique-kira.png`}
+              src={`https://github.com/${username}.png`}
             />
             <Text
               variant="body4"
@@ -157,26 +170,3 @@ export default function PaginaInicial() {
     </>
   );
 }
-=======
-function Title() {
-return(
-  <h1>Seja Bem-Vindo Nakama!!!</h1>
-);
-}
-
-function HomePage() {
-    return <div>
-
-      <Title>Seja Bem-Vindo Nakama!!!</Title>
-      <h2>Discord Kaique - One Piece</h2>
-      <style jsx>{`
-     
-      h1 {
-        color: red;
-      }
-    `}</style>
-      </div>
-  }
-  
-  export default HomePage
->>>>>>> 69c4948d61b3e29a8737c5991f3ba4302feaf64d
